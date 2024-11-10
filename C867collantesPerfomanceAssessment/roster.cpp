@@ -9,7 +9,7 @@ using namespace std;
 Roster::Roster(int numStudents)
 {
 	this->numStudents = numStudents;
-	this->rosterIndex = 0;
+	this->rosterIndex = 0; // establishes array index
 	for (int i = 0; i < numStudents; i++)
 	{
 		this->classRosterArray[i] = new Student;
@@ -88,23 +88,60 @@ void Roster::parse(string studentData)
 			cout << "Degree program not found" << endl;
 		}
 
-		// increment rosterIndex
+		// increment array index
 		rosterIndex++;
-	}
-	return;	
+	}	
 }
 
-
-void add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, DegreeProgram degreeProgram);
-
-
-void remove(string studentID);
+// add student object to roster 
+void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, DegreeProgram degreeProgram)
+{
+	int daysInCourse[3] = { daysInCourse1, daysInCourse2, daysInCourse3 }; // repackage into array
+	classRosterArray[numStudents] = new Student(studentID, firstName, lastName, emailAddress, age, daysInCourse, degreeProgram);
+}
 
 // print functions
-void printAll();	
+void Roster::printAll()
+{
+	cout << "Displaying all students:" << endl
+		 << "StuID\tFirst\tLast\tAge\tDays Left\tDegree" << endl;
+	for (int i = 0; i < numStudents; i++)
+	{
+		if (classRosterArray == nullptr)
+		{
+			continue;
+		}
+		else
+		{
+			classRosterArray[i]->print();
+		}
+	}
+	cout << endl;
+}
+
+// print students that match specified degree program
+void Roster::printByDegreeProgram(DegreeProgram degreeProgram)
+{
+	cout << "Showing Students in degree program:";
+	int studentsWithDegree = 0;
+	for (int i = 0; i < numStudents; i++)
+	{
+		if (classRosterArray[i]->getStudentDegreeProgram() == degreeProgram)
+		{
+			classRosterArray[i]->print();
+			++studentsWithDegree;
+		}
+		if (studentsWithDegree == 0)
+		{
+			cout << "ERROR" << endl;
+		}
+	}
+}
+
+// remove student from roster
+void remove(string studentID);
 
 
-void printByDegreeProgram(DegreeProgram degreeProgram);
 
 
 void printInvalidEmails();

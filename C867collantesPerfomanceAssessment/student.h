@@ -52,8 +52,6 @@ public: // declare class functions; operations a class user can perform on objec
 	void printStudentDegreePrograms();					// prints student's degree program
 	void print();										// prints 'this' student's data
 
-	static void printHeader();							// displays header for data table
-
 	// default constructor
 	Student();								
 

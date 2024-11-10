@@ -124,17 +124,12 @@ void Student::print()
 	cout << this->getStudentID() << "\t";
 	cout << this->getStudentFirstName() << "\t";
 	cout << this->getStudentLastName() << "\t";
-	cout << this->getStudentEmail() << "\t";
+//	cout << this->getStudentEmail() << "\t";	// n/a
 	cout << this->getStudentAge() << "\t";
 	cout << this->getStudentDaysToComplete()[0] << ", ";
 	cout << this->getStudentDaysToComplete()[1] << ", ";
 	cout << this->getStudentDaysToComplete()[2] << "\t";
 	cout << degreeProgramStrings[this->getStudentDegreeProgram()] << endl;
-}
-
-void Student::printHeader()
-{
-	cout << "Displaying all students: " << endl;
 }
 
 // default constructor function
