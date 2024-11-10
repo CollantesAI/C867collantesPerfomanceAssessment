@@ -138,18 +138,49 @@ void Roster::printByDegreeProgram(DegreeProgram degreeProgram)
 	}
 }
 
+// print invalid emails
+void Roster::printInvalidEmails()
+{
+	cout << "Displaying invalid emails:" << endl;
+
+	bool anyInvalidEmails = false;
+	for (int i = 0; i < numStudents; i++)
+	{
+		string eAddress = (classRosterArray[i]->getStudentEmail());
+		if ((eAddress.find("@") == string::npos) || (eAddress.find(".") == string::npos) || (eAddress.find(" ") != string::npos))
+		{
+			anyInvalidEmails = true;
+			cout << classRosterArray[i]->getStudentEmail() << " - is invalid" << endl;
+		}
+	}
+	if (!anyInvalidEmails)
+	{
+		cout << "NONE DETECTED" << endl;
+	}
+}
+
+// print average days in courses for each student
+void Roster::printAverageDaysInCourse(string studentID)
+{
+	cout << "Average days in course:" << endl;
+	for (int i = 0; i < numStudents; i++)
+	{
+		if (studentID == classRosterArray[i]->getStudentID())
+		{
+			cout << "Student ID: " << studentID << ", average days in course is: "
+				 << ((classRosterArray[i]->getStudentDaysToComplete()[0] +
+				      classRosterArray[i]->getStudentDaysToComplete()[1] +
+					  classRosterArray[i]->getStudentDaysToComplete()[2]) / 3)
+				 << endl;
+		}
+	}
+}
+
 // remove student from roster
-void remove(string studentID);
+void Roster::remove(string studentID)
+{
 
-
-
-
-void printInvalidEmails();
-
-
-void printAverageDaysInCourse(string studentID);
-
-
+}
 
 // deconstructor function
 Roster::~Roster()
