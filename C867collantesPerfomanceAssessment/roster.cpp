@@ -88,7 +88,7 @@ void Roster::parse(string studentData)
 			cout << "Degree program not found" << endl;
 		}
 
-		// increment roterIndex
+		// increment rosterIndex
 		rosterIndex++;
 	}
 	return;	
