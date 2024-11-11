@@ -107,7 +107,7 @@ void Roster::printAll()
 		 << "StuID\tFirst\tLast\tAge\tDays Left\tDegree" << endl << endl;
 	for (int i = 0; i < numStudents; i++)
 	{
-		if (classRosterArray == nullptr)
+		if (classRosterArray[i] == nullptr)
 		{
 			continue;
 		}
@@ -116,32 +116,13 @@ void Roster::printAll()
 			classRosterArray[i]->print();
 		}
 	}
-	cout << endl << endl;
-}
-
-// print students that match specified degree program
-void Roster::printByDegreeProgram(DegreeProgram degreeProgram)
-{
-	cout << "Showing Students in degree program:";
-	int studentsWithDegree = 0;
-	for (int i = 0; i < numStudents; i++)
-	{
-		if (classRosterArray[i]->getStudentDegreeProgram() == degreeProgram)
-		{
-			classRosterArray[i]->print();
-			++studentsWithDegree;
-		}
-		if (studentsWithDegree == 0)
-		{
-			cout << "ERROR" << endl;
-		}
-	}
+	cout << endl;
 }
 
 // print invalid emails
 void Roster::printInvalidEmails()
 {
-	cout << "Displaying invalid emails:" << endl;
+	cout << "Displaying invalid emails:" << endl << endl;
 
 	bool anyInvalidEmails = false;
 	for (int i = 0; i < numStudents; i++)
@@ -157,13 +138,14 @@ void Roster::printInvalidEmails()
 	{
 		cout << "NONE DETECTED" << endl;
 	}
+	cout << endl;
 }
 
 // print average days in courses for each student
+// step 1: create function to call based on index
 void Roster::printAverageDaysInCourse(string studentID)
 {
 	int numClassesPerStudent = 3;
-	cout << "Average days in course:" << endl;
 	for (int i = 0; i < numStudents; i++)
 	{
 		if (studentID == classRosterArray[i]->getStudentID())
@@ -174,6 +156,31 @@ void Roster::printAverageDaysInCourse(string studentID)
 					  classRosterArray[i]->getStudentDaysToComplete()[2]) / numClassesPerStudent)
 				 << endl;
 		}
+	}
+}
+// step 2 create index call function
+string Roster::getStudentID(int index)
+{
+	string studentID = classRosterArray[index]->getStudentID();
+	return studentID;
+}
+
+// print students that match specified degree program
+void Roster::printByDegreeProgram(DegreeProgram degreeProgram)
+{
+	cout << "Showing Students in degree program: " << degreeProgramStrings[degreeProgram] << endl << endl;
+	int studentsWithDegree = 0;
+	for (int i = 0; i < numStudents; i++)
+	{
+		if (classRosterArray[i]->getStudentDegreeProgram() == degreeProgram)
+		{
+			classRosterArray[i]->print();
+			++studentsWithDegree;
+		}
+	}
+	if (studentsWithDegree == 0)
+	{
+		cout << "ERROR" << endl;
 	}
 	cout << endl;
 }
@@ -198,7 +205,7 @@ void Roster::remove(string studentID)
 	}
 	if (studentExists == false)
 	{
-		cout << "The student with the ID: " << studentID << ", was not found." << endl;
+		cout << "The student with the ID: " << studentID << ", was not found." << endl << endl;
 	}
 	else
 	{

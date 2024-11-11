@@ -36,5 +36,25 @@ int main()
     // displaying invalid emails
     classRoster->printInvalidEmails();
 
+    // displaying average days in course
+    for (int i = 0; i < 5; i++)
+    {
+        classRoster->printAverageDaysInCourse(classRoster->getStudentID(i));
+    }
+    cout << endl;
+
+    // displaying students in SOFTWARE
+    classRoster->printByDegreeProgram(SOFTWARE);
+
+    // removing student with ID: A3, twice.
+    classRoster->remove("A3");
+    classRoster->remove("A3");
+
+    // deconstructor
+    classRoster->~Roster();
+    delete classRoster;
+
+    cout << "DONE" << endl;
+
     return 0;
 }
