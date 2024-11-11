@@ -23,5 +23,18 @@ int main()
          << WGUStuName << endl
          << endl;
 
+    // parsing provided studentData
+    Roster* classRoster = new Roster(5);
+    for (int i = 0; i < 5; i++)
+    {
+        classRoster->parse(studentData[i]);
+    }
+
+    // displaying provided data
+    classRoster->printAll();
+    
+    // displaying invalid emails
+    classRoster->printInvalidEmails();
+
     return 0;
 }

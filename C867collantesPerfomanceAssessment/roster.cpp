@@ -75,7 +75,7 @@ void Roster::parse(string studentData)
 		{
 			classRosterArray[rosterIndex]->setDegreeProgram(SECURITY);
 		}
-		else if (program == "NEWTORK")
+		else if (program == "NETWORK")
 		{
 			classRosterArray[rosterIndex]->setDegreeProgram(NETWORK);
 		}
@@ -90,7 +90,7 @@ void Roster::parse(string studentData)
 
 		// increment array index
 		rosterIndex++;
-	}	
+	}
 }
 
 // add student object to roster 
@@ -103,8 +103,8 @@ void Roster::add(string studentID, string firstName, string lastName, string ema
 // print functions
 void Roster::printAll()
 {
-	cout << "Displaying all students:" << endl
-		 << "StuID\tFirst\tLast\tAge\tDays Left\tDegree" << endl;
+	cout << "Displaying all students:" << endl << endl
+		 << "StuID\tFirst\tLast\tAge\tDays Left\tDegree" << endl << endl;
 	for (int i = 0; i < numStudents; i++)
 	{
 		if (classRosterArray == nullptr)
@@ -116,7 +116,7 @@ void Roster::printAll()
 			classRosterArray[i]->print();
 		}
 	}
-	cout << endl;
+	cout << endl << endl;
 }
 
 // print students that match specified degree program
@@ -162,6 +162,7 @@ void Roster::printInvalidEmails()
 // print average days in courses for each student
 void Roster::printAverageDaysInCourse(string studentID)
 {
+	int numClassesPerStudent = 3;
 	cout << "Average days in course:" << endl;
 	for (int i = 0; i < numStudents; i++)
 	{
@@ -170,20 +171,48 @@ void Roster::printAverageDaysInCourse(string studentID)
 			cout << "Student ID: " << studentID << ", average days in course is: "
 				 << ((classRosterArray[i]->getStudentDaysToComplete()[0] +
 				      classRosterArray[i]->getStudentDaysToComplete()[1] +
-					  classRosterArray[i]->getStudentDaysToComplete()[2]) / 3)
+					  classRosterArray[i]->getStudentDaysToComplete()[2]) / numClassesPerStudent)
 				 << endl;
 		}
 	}
+	cout << endl;
 }
 
 // remove student from roster
 void Roster::remove(string studentID)
 {
-
+	bool studentExists = false;
+	cout << "Removing student with ID: " << studentID << "." << endl << endl;
+	for (int i = 0; i < numStudents; i++)
+	{
+		if (classRosterArray[i] == nullptr)
+		{
+			continue;
+		}
+		else if (studentID == classRosterArray[i]->getStudentID())
+		{
+			classRosterArray[i] = nullptr;
+			studentExists = true;
+			break;
+		}
+	}
+	if (studentExists == false)
+	{
+		cout << "The student with the ID: " << studentID << ", was not found." << endl;
+	}
+	else
+	{
+		cout << "The student with the ID: " << studentID << ", has been removed." << endl << endl;
+		this->printAll();
+	}
 }
 
 // deconstructor function
 Roster::~Roster()
 {
-
+	for (int i = 0; i < numStudents; i++)
+	{
+		delete classRosterArray[i];
+		classRosterArray[i] = nullptr;
+	}
 }

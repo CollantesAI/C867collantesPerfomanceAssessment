@@ -109,9 +109,11 @@ void Student::printStudentAge()
 
 void Student::printStudentDaysToComplete()
 {
-	cout << this->getStudentDaysToComplete()[0] << ", ";
-	cout << this->getStudentDaysToComplete()[1] << ", ";
-	cout << this->getStudentDaysToComplete()[2] << endl;
+	cout << "{"
+		 << this->getStudentDaysToComplete()[0] << ", "
+		 << this->getStudentDaysToComplete()[1] << ", "
+		 << this->getStudentDaysToComplete()[2]
+		 << "}" << endl;
 }
 
 void Student::printStudentDegreePrograms()
@@ -125,10 +127,10 @@ void Student::print()
 	cout << this->getStudentFirstName() << "\t";
 	cout << this->getStudentLastName() << "\t";
 //	cout << this->getStudentEmail() << "\t";	// n/a
-	cout << this->getStudentAge() << "\t";
+	cout << this->getStudentAge() << "\t{";
 	cout << this->getStudentDaysToComplete()[0] << ", ";
 	cout << this->getStudentDaysToComplete()[1] << ", ";
-	cout << this->getStudentDaysToComplete()[2] << "\t";
+	cout << this->getStudentDaysToComplete()[2] << "}\t";
 	cout << degreeProgramStrings[this->getStudentDegreeProgram()] << endl;
 }
 
